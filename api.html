@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JSON API</title>
+  <script>
+    // 读取本地JSON文件并返回
+    async function fetchData() {
+      const response = await fetch('wdtv.json');
+      return response.json();
+    }
+    
+    // 根据路径模拟不同API端点
+    window.onload = async function() {
+      const path = window.location.hash.substr(1) || 'users';
+      const data = await fetchData();
+      
+      // 设置响应头
+      document.write('<pre>');
+      document.write(JSON.stringify(data[path], null, 2));
+      document.write('</pre>');
+      
+      // 设置正确的Content-Type
+      document.contentType = 'application/json';
+    };
+  </script>
+</head>
+<body></body>
+</html>
